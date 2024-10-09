@@ -14,23 +14,22 @@ public class Main {
 
         ServerSocket ss = new ServerSocket(5763);
         Socket socket = ss.accept();
-
+        
         System.out.println("Qualcuno è entrato nel server");
-
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-
-        String received_data = in.readLine();
-        System.out.println("Messaggio ricevuto: " + received_data);
-
-        String upperString = received_data.toUpperCase();
-        out.writeBytes(upperString + '\n');
-
-        System.out.println("** AGGIORNATO E INVIATO LA STRINGA **");
-
+        
+        String received_data;
+        while(!((received_data = in.readLine()).equals("!"))) {
+            
+            System.out.println("Messaggio ricevuto: " + received_data);
+            String upperString = received_data.toUpperCase();
+            out.writeBytes(upperString + '\n');
+            System.out.println("** AGGIORNATO E INVIATO LA STRINGA MODIFICATA**");
+        
+        }
         socket.close();
         ss.close();
-
         System.out.println("Server chiuso - ARRIVEDERCI");
     }
 }
