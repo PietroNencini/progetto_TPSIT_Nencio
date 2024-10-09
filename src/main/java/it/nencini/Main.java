@@ -30,5 +30,7 @@ public class Main {
 
         socket.close();
         ss.close();
+
+        System.out.println("Server chiuso - ARRIVEDERCI");
     }
 }
